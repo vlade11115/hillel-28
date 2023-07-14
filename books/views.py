@@ -13,7 +13,6 @@ from books.serializers import (
 )
 
 
-# Create your views here.
 class BooksViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by("id")
     serializer_class = BookSerializer
