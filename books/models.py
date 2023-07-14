@@ -28,7 +28,7 @@ class OrderItem(models.Model):
 
 
 class MonoSettings(models.Model):
-    public_key = models.CharField(max_length=200)
+    public_key = models.CharField(max_length=1000)
 
     @classmethod
     def get_token(cls):
