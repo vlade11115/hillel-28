@@ -1,5 +1,5 @@
 """
-URL configuration for gettingstarted project.
+URL configuration for booksstoreapi project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -17,13 +17,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path, include
 
-import hello.views
-
 urlpatterns = [
-    path("", hello.views.index, name="index"),
     path("api/", include("books.urls")),
-    path("db/", hello.views.db, name="db"),
-    # Uncomment this and the entry in `INSTALLED_APPS` if you wish to use the Django admin feature:
-    # https://docs.djangoproject.com/en/4.2/ref/contrib/admin/
-    # path("admin/", admin.site.urls),
+
 ]
