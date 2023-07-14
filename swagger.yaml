@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: Books API
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000/api/v2
+paths:
+  /books/:
+    get:
+      summary: Method for get list of books
+      tags:
+        - Books
+      operationId: getallbooks
+      responses:
+        "200":
+          description: Successful list of books
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Books"
+
+    post:
+      summary: Method for add new book
+      tags:
+        - Books
+      operationId: createbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookCreate"
+      responses:
+        "200":
+          description: Successful created book
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        "400":
+          description: missing name field
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /order/:
+    post:
+      tags:
+        - Payment
+      summary: Place order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+            examples:
+              "Buy one book with id 34":
+                value:
+                  order:
+                    [ { "book_id": 34, "quantity": 1 } ]
+              "Buy three books, one with id 4 and two with id 50":
+                value:
+                  order:
+                    [ { "book_id": 4, "quantity": 1 }, { "book_id": 50, "quantity": 2 } ]
+      responses:
+        "200":
+          description: Place order for a book
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+
+components:
+  schemas:
+    BookCreate:
+      type: object
+      required:
+        - title
+        - author
+        - quantity
+        - price
+      properties:
+
+        title:
+          type: string
+          example: Wild animals
+
+        author:
+          type: string
+          example: Connal Macenel
+
+        quantity:
+          type: integer
+          example: 42
+
+        price:
+          type: integer
+          example: 1000
+    Book:
+      type: object
+      required:
+        - title
+        - author
+        - quantity
+        - price
+      properties:
+        id:
+          type: integer
+          example: 12
+
+        title:
+          type: string
+          example: Wild animals
+
+        author:
+          type: string
+          example: Connal Macenel
+
+        quantity:
+          type: integer
+          example: 42
+
+        price:
+          type: integer
+          example: 1000
+    Order:
+      type: object
+      required:
+        - order
+      properties:
+        order:
+          type: array
+          items:
+            type: object
+            required:
+              - book_id
+              - quantity
+            properties:
+              book_id:
+                type: integer
+                example: 12
+              quantity:
+                type: integer
+                example: 2
+    OrderResponse:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          example: 100
+
+    Books:
+      type: array
+      items:
+        $ref: "#/components/schemas/Book"
+
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string

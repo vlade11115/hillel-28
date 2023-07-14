@@ -1,0 +1,15 @@
+{
+  "invoiceId": "230711Ck4kpkPGhnv8mU",
+  "status": "success",
+  "amount": 4200,
+  "ccy": 980,
+  "finalAmount": 4200,
+  "createdDate": "2023-07-11T17:08:24Z",
+  "modifiedDate": "2023-07-11T17:08:50Z",
+  "reference": "84d0070ee4e44667b31371d8f8813947",
+  "walletData": {
+    "walletId": "69f780d841a0434aa535b08821f4822c",
+    "cardToken": "2307113fNpBMQc2qiQ78",
+    "status": "created"
+  }
+}

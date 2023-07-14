@@ -70,6 +70,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "rest_framework",
+    "books",
 ]
 
 MIDDLEWARE = [
@@ -189,3 +191,5 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MONOBANK_API_KEY = os.getenv("MONOBANK_API_KEY")
