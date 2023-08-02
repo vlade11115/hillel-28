@@ -1,6 +1,8 @@
 from django.urls import reverse
-from rest_framework import viewsets, views
+from django.db import transaction
 from rest_framework import permissions
+from rest_framework import viewsets, views
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 
 from books.models import Book, Order, MonoSettings
@@ -20,14 +22,17 @@ class BooksViewSet(viewsets.ModelViewSet):
 
 
 class OrdersViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Order.objects.all().order_by("-id")
+    queryset = Order.objects.all().order_by("id")
     serializer_class = OrderModelSerializer
     permission_classes = [permissions.AllowAny]
+    pagination_class = LimitOffsetPagination
+    filterset_fields = {"id": ["gte", "lte"]}
 
 
 class OrderView(views.APIView):
     permission_classes = [permissions.AllowAny]
 
+    @transaction.atomic
     def post(self, request):
         order = OrderSerializer(data=request.data)
         order.is_valid(raise_exception=True)
