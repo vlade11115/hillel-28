@@ -3,7 +3,7 @@ Brotli==1.0.9
 certifi==2023.7.22
 charset-normalizer==3.2.0
 dj-database-url==2.0.0
-Django==4.2.3
+Django==4.2.4
 djangorestframework==3.14.0
 ecdsa==0.18.0
 gunicorn==21.2.0
